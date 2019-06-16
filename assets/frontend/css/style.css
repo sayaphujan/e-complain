@@ -1,0 +1,40 @@
+.slider h3,
+.slider h5 {
+	text-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+}
+
+.slider h5,
+.clients h3 {
+	text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+
+.slider .slides li img{
+	-webkit-filter: brightness(50%);
+}
+
+.slider .slides li .caption {
+	top: 20%;
+	}
+
+.parallax-container{
+	height: 20%;
+}
+
+.parallax img{
+	filter: grayscale(1);
+	opacity: 0.5 !important;
+}
+
+.clients img{
+	max-width: 150px;
+	filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.8));
+}
+
+section, footer{
+	padding: 20px 0;
+}
+
+.brand-logo img{
+	max-height: 40px; margin-top: 10px;
+}
