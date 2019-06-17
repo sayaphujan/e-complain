@@ -111,7 +111,7 @@
                                 </i>  <span class="treeview">' . strtoupper($m->nama_menu) . '</span>') . '</li>';
                         }                
                     }           
-            }elseif($this->session->userdata('role')=='WargaMuh'){           
+            }elseif($this->session->userdata('role')=='WargaMuh' || $this->session->userdata('role')=='Umum'){           
                 $main = $this->db->get_where('tb_menu', array('parent' => 0,'role'=>'WargaMuh', 'aktif'=>'Y'));
                 foreach ($main->result() as $m) {
                     // chek ada submenu atau tidak
