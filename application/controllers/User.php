@@ -77,7 +77,7 @@ class User extends CI_Controller{
             $alamat     = $this->input->post('alamatuser');
             $grup       = $this->input->post('grup');
             $level      = $this->input->post('level');
-            $password   = $this->input->post('passwd');
+            $password   = SHA1($this->input->post('passwd').$this->config->item('key_login'));
             $pekerjaan  = $this->input->post('pekerjaan');
             $notelp     = $this->input->post('notelp');
             $email      = $this->input->post('email');
