@@ -9,7 +9,7 @@
         <ul class="right hide-on-med-and-down">
          <li><a href="<?php echo base_url(); ?>#home">Beranda</a></li>
          <?php 
-         if($this->uri->segment('1') == 'statistik'){
+         if($this->uri->segment('1') != '#home'){
           echo '<li><a href="'.base_url().'#fh5co-team">Pengguna</a></li>';
         } else{
          echo '<li><a href="#fh5co-team">Pengguna</a></li>';
@@ -31,7 +31,7 @@
   </li>
  <li><a href="<?php echo base_url(); ?>#home">Beranda</a></li>
          <?php 
-         if($this->uri->segment('1') == 'statistik'){
+         if($this->uri->segment('1') != '#home'){
           echo '<li><a href="'.base_url().'#fh5co-team">Pengguna</a></li>';
         } else{
          echo '<li><a href="#fh5co-team">Pengguna</a></li>';
