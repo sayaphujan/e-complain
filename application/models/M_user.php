@@ -111,16 +111,16 @@ class M_user extends CI_Model {
 
     function send_email($email, $key){
 
-        $config['protocol']     = 'smtp';
-        $config['smtp_host']    = 'smtp.sendgrid.net';
-        $config['smtp_user']    = 'golden-case';
-        $config['smtp_pass']    = 'h72wupFA496pNA';
-        $config['smtp_port']    = '587';
-        $config['mailtype']     = 'html';
-        $config['charset']      = 'iso-8859-1';
-        $config['wordwrap']     = TRUE;
-        $config['crlf']         = "\r\n";
-        $config['newline']      = "\r\n";
+        $config['protocol']     = '';
+        $config['smtp_host']    = '';
+        $config['smtp_user']    = '';
+        $config['smtp_pass']    = '';
+        $config['smtp_port']    = '';
+        $config['mailtype']     = '';
+        $config['charset']      = '';
+        $config['wordwrap']     = ;
+        $config['crlf']         = ;
+        $config['newline']      = ;
 
         $this->email->initialize($config);
 
