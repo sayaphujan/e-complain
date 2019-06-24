@@ -46,7 +46,7 @@ Highcharts.chart('container', {
     },
     
     subtitle: {
-        text: 'Jumlah Data Masuk : '+<?php echo json_encode($total,JSON_NUMERIC_CHECK); ?>
+        text: 'Jumlah Data : '+<?php echo json_encode($total,JSON_NUMERIC_CHECK); ?>
     },
 
     tooltip: {
