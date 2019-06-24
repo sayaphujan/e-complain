@@ -96,8 +96,8 @@
                             <?php echo form_error('email', '<div class="text-red">', '</div>'); ?>
                         </div>
                         <div class="form-group">
-                            <label for="">Lampiran User</label>
-                            <textarea name="lampiran" class="form-control" rows="2" placeholder="Masukkan Lampiran User"><?php echo set_value('lampiran'); ?></textarea>
+                            <label for="">Deskripsi</label>
+                            <textarea name="lampiran" class="form-control" rows="2" placeholder="Silakan jelaskan tentang diri Anda"><?php echo set_value('lampiran'); ?></textarea>
                             <?php echo form_error('lampiran', '<div class="text-red">', '</div>'); ?>
                         </div>
                         <div class="form-group">

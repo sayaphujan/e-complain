@@ -19,7 +19,7 @@ class M_user extends CI_Model {
             }
     }
 
-    function registrasi($jenis, $nomor, $nama, $ttl, $alamat, $telp, $pekerjaan, $jk, $email, $username, $password){
+    function registrasi($jenis, $nomor, $nama, $ttl, $alamat, $telp, $pekerjaan, $jk, $email, $grup, $username, $password){
         $keylogin   = $this->config->item('key_login');
             if($jenis=='nbm'){ $role = 'wargaMuh'; }else{ $role = 'Umum'; }
             $datauser = array(
@@ -36,7 +36,7 @@ class M_user extends CI_Model {
                         'password'          => sha1($password.$keylogin),
                         'role'              => $role,
                         'last_login'        => date('Y-m-d H:i:s'),
-                        'grup_id'           => 1
+                        'grup_id'           => $grup
                         );
             $res = $this->db->insert($this->tb_user, $datauser);
             $insert_id = $this->db->insert_id();
@@ -118,9 +118,9 @@ class M_user extends CI_Model {
         $config['smtp_port']    = '';
         $config['mailtype']     = '';
         $config['charset']      = '';
-        $config['wordwrap']     = ;
-        $config['crlf']         = ;
-        $config['newline']      = ;
+        $config['wordwrap']     = '';
+        $config['crlf']         = "";
+        $config['newline']      = "";
 
         $this->email->initialize($config);
 
@@ -139,15 +139,19 @@ class M_user extends CI_Model {
         $this->email->subject('Selamat Datang di e-complaint PCM Bligo');
         $this->email->from('admin@pcm-bligo.com','Admin e-complaint PCM Bligo');
         $this->email->to($email);
-        $this->email->cc('shinta.setiawati@gmail.com');
         $this->email->message($msg);
         if($this->email->send())
         {
-            redirect(base_url().'dashboard');
-        }else
-        {
+            if($input['role'] == 'WargaMuh'){
+                redirect(base_url().'loginmuh');
+            }elseif($input['role'] == 'Umum'){
+                redirect(base_url().'loginumum');
+            }else{
+                redirect(base_url().'login');
+            }
+            
+        }else{
             redirect(base_url());
-        
         }
 
     }
@@ -163,9 +167,9 @@ class M_user extends CI_Model {
         $config['smtp_port']    = '';
         $config['mailtype']     = '';
         $config['charset']      = '';
-        $config['wordwrap']     = ;
-        $config['crlf']         = ;
-        $config['newline']      = ;
+        $config['wordwrap']     = '';
+        $config['crlf']         = "";
+        $config['newline']      = "";
 
         $this->email->initialize($config);
 

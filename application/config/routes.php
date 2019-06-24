@@ -51,6 +51,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'welcome';
 $route['statistik'] 				= 'welcome/statistik';
+$route['statistik-aum']				= 'welcome/statistik_aum';
+$route['statistik-status']			= 'welcome/statistik_status';
+$route['statistik-daily']			= 'welcome/statistik_daily';
 $route['login'] 					= 'Auth';
 $route['registrasi'] 				= 'Auth/registrasi';
 $route['forget'] 					= 'Auth/forget';
@@ -66,11 +69,15 @@ $route['complaint'] 				= 'Komplain';
 $route['complaint/(:any)']			= 'Komplain/$1';
 $route['complaint/(:any)/(:num)'] 	= 'Komplain/$1/$2';
 
+$route['diagram'] 					= 'Diagram';
+$route['diagram/statistik-aum']		= 'Diagram/statistik_aum';
+$route['diagram/statistik-status']	= 'Diagram/statistik_status';
+$route['diagram/statistik-daily']	= 'Diagram/statistik_daily';
+
 $route['form'] 						= 'Form';
 $route['form/(:any)']				= 'Form/$1';
 $route['list']						= 'Form/complain_list';
-$route['detail']					= 'Form/complain_detail';
-$route['detail/(:any)']				= 'Form/detail/$1';
+$route['detail/(:any)']					= 'Form/complain_detail/$1';
 
 
 $route['404_override'] = '';

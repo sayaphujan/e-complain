@@ -4,7 +4,7 @@ class Form extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model(array('M_komplain', 'M_image'));
+        $this->load->model(array('M_komplain', 'M_aum', 'M_group', 'M_image'));
         chek_session();
     }
     
@@ -65,7 +65,7 @@ class Form extends CI_Controller {
                 $image = $this->upload->file_name;
                 if ($image = $this->upload->file_name==0) {
                     $data = array(
-                        'id_user'         => $this->session->userdata('id_user'),
+                        'id_user'         => $this->input->post('id_user'),
                         'id_aum'          => $this->input->post('id_aum'),
                         'judul_complain'  => $this->input->post('judul_complain'),
                         'jenis_complain'  => $this->input->post('jenis_complain'),
@@ -79,12 +79,16 @@ class Form extends CI_Controller {
                     );
                     $kode=$this->input->post('id_complain');
                     $this->M_komplain->edit($kode,$data);
-                    redirect(base_url().'list');
+                    if($this->session->userdata('role') == 'Administrator'){
+                        redirect(base_url().'complaint');
+                    }else{
+                        redirect(base_url().'list');
+                    }
                 }else{
                     $this->M_image->do_upload();
                     $image = $this->upload->file_name;
                     $data = array(
-                        'id_user'         => $this->session->userdata('id_user'),
+                        'id_user'         => $this->input->post('id_user'),
                         'id_aum'          => $this->input->post('id_aum'),
                         'judul_complain'  => $this->input->post('judul_complain'),
                         'jenis_complain'  => $this->input->post('jenis_complain'),
@@ -99,7 +103,11 @@ class Form extends CI_Controller {
                     );
                     $kode=$this->input->post('id_complain');
                     $this->M_komplain->edit($kode,$data);
-                    redirect(base_url().'list');
+                    if($this->session->userdata('role') == 'Administrator'){
+                        redirect(base_url().'complaint');
+                    }else{
+                        redirect(base_url().'list');
+                    }
                 }                
             }else {
                 $id_complain    = $this->uri->segment(3);
@@ -126,13 +134,10 @@ class Form extends CI_Controller {
         $this->template->display('backend/template','form/view', $data);
     }
 
-    function complain_detail() {
-        $data['record'] = $this->M_komplain->getusercomplain($this->session->userdata('id_user'))->result(); 
-        $this->template->display('backend/template','form/view', $data);
-    }
-
-    function detail() {
-        $data['record'] = $this->M_komplain->getusercomplain($this->session->userdata('id_user'))->result(); 
+    function complain_detail($id_complain) {
+        $data['aum']    = $this->M_aum->semua();
+        $data['grup']   = $this->M_group->get_all();
+        $data['record'] = $this->M_komplain->getcomplain($id_complain)->row_array(); 
         $this->template->display('backend/template','form/detail', $data);
     }
 

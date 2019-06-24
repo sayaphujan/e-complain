@@ -23,7 +23,8 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="example">User</label>
-                            <input type="text" name="id_user" class="form-control" placeholder="Username Login" value="<?php echo $record['nama_user']; ?>" readonly />
+                            <input type="hidden" name="id_user" class="form-control" placeholder="Username Login" value="<?php echo $record['id_user']; ?>" readonly />
+                            <input type="text" name="nama_user" class="form-control" placeholder="Username Login" value="<?php echo $record['nama_user']; ?>" readonly />
                                    <?php echo form_error('id_user', '<div class="text-red">', '</div>'); ?>
                         </div>   
                         <div class="form-group">
@@ -82,12 +83,12 @@
                         </div> 
                         <div class="form-group">
                             <label for="">Solusi</label>
-                            <textarea name="solusi" class="form-control" rows="2" placeholder="Solusi"><?php echo $record['solusi']; ?></textarea>
+                            <textarea name="solusi" class="form-control" rows="2" placeholder="Solusi" required><?php echo $record['solusi']; ?></textarea>
                             <?php echo form_error('solusi', '<div class="text-red">', '</div>'); ?>
                         </div>
                         <div class="form-group">
                             <label for="">Status</label>
-                            <select name='status' class="form-control ">
+                            <select name='status' class="form-control " required>
                                 <option value='0'>- Select Status -</option>
                                 <option value='pending' <?php if ($record['status']=="pending"){ echo 'selected'; } ?>>Pending</option>
                                 <option value='ditolak' <?php if ($record['status']=="ditolak"){ echo 'selected'; } ?>>Ditolak</option>                               
@@ -97,7 +98,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Status Complain</label>
-                            <select name='status_complain' class="form-control ">
+                            <select name='status_complain' class="form-control " required>
                                 <option value='0'>- Select Status -</option>
                                 <option value='batal' <?php if ($record['status_complain']=="batal"){ echo 'selected'; } ?>>Batal</option>
                                 <option value='selesai' <?php if ($record['status_complain']=="selesai"){ echo 'selected'; } ?>>Selesai</option>                               

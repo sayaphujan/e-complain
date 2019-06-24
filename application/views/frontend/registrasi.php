@@ -57,6 +57,14 @@ h5, h3{
                     <div class="form-group">
                         <input type="text" class="form-input" name="pekerjaan" placeholder="Pekerjaan" required/>
                     </div>
+                    <select name='grup' id="grup">
+                            <option value="" disable selected>-- Pilih Grup Anda --</option>
+                                <?php
+                                    foreach ($record as $r) {
+                                        echo "<option value=".$r->grup_id."".set_select('grup', $r->grup_id).">".$r->nama_grup."</option>";
+                                    }
+                                ?>
+                    </select>
                     <div class="form-group">
                         <input type="text" class="form-input" name="username" placeholder="Username" required/>
                     </div>

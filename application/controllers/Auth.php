@@ -145,9 +145,11 @@ class Auth extends CI_Controller {
             	'email'    => '',
 				'username' => '',
 				'password' => '',
-				'captcha'  => ''
+				'captcha'  => '',
+				'grup_id'  => ''
 				);
 
+            $data['record']=$this->db->get_where('tb_grup')->result();   
 			$this->template->load('frontend','frontend/registrasi', $data);
     }
 
@@ -318,6 +320,7 @@ class Auth extends CI_Controller {
 		$username 	= $this->input->post('username');		
 		$password 	= $this->input->post('password');
 		$email 		= $this->input->post('email');
+		$grup 		= $this->input->post('grup');
 		$captcha 	= $this->input->post('captcha');
 		$word 	 	= $this->input->post('word');
 
@@ -372,7 +375,7 @@ class Auth extends CI_Controller {
 						);
 				$this->template->load('frontend','frontend/registrasi', $data);
 		}else{
-			$this->M_user->registrasi($jenis, $nomor, $nama, $ttl, $alamat, $telp, $pekerjaan, $jk, $email, $username, $password);
+			$this->M_user->registrasi($jenis, $nomor, $nama, $ttl, $alamat, $telp, $pekerjaan, $jk, $email, $grup, $username, $password);
 		}
 	}
 

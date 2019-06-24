@@ -66,7 +66,11 @@ class M_komplain extends CI_Model {
     function hapus($kode) {
         $this->db->where('id_complain', $kode);
         $this->db->delete($this->table);
-        redirect(base_url().'complaint');
+        if($this->session->userdata('role') == 'Administrator'){
+                        redirect(base_url().'complaint');
+                    }else{
+                        redirect(base_url().'list');
+                    }
     }
 
     function delete($kode) {

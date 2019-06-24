@@ -90,7 +90,7 @@ class Komplain extends CI_Controller {
                 $image = $this->upload->file_name;
                 if ($image = $this->upload->file_name==0) {
                     $data = array(
-                        'id_user'         => $this->session->userdata('id_user'),
+                        'id_user'         => $this->input->post('id_user'),
                         'id_aum'          => $this->input->post('id_aum'),
                         'judul_complain'  => $this->input->post('judul_complain'),
                         'jenis_complain'  => $this->input->post('jenis_complain'),
@@ -109,7 +109,7 @@ class Komplain extends CI_Controller {
                     $this->M_image->do_upload();
                     $image = $this->upload->file_name;
                     $data = array(
-                        'id_user'         => $this->session->userdata('id_user'),
+                        'id_user'         => $this->input->post('id_user'),
                         'id_aum'          => $this->input->post('id_aum'),
                         'judul_complain'  => $this->input->post('judul_complain'),
                         'jenis_complain'  => $this->input->post('jenis_complain'),

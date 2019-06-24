@@ -104,8 +104,8 @@
                             <?php echo form_error('email', '<div class="text-red">', '</div>'); ?>
                         </div> 
                         <div class="form-group">
-                            <label for="">Lampiran User</label>
-                            <textarea name="lampiran" class="form-control" rows="2" placeholder="Lampiran User" required><?php echo $record['lampiran_user']; ?></textarea>
+                            <label for="">Deskripsi</label>
+                            <textarea name="lampiran" class="form-control" rows="2" placeholder="Silakan jelaskan tentang diri Anda" required><?php echo $record['lampiran_user']; ?></textarea>
                             <?php //echo form_error('alamatuser', '<div class="text-red">', '</div>'); ?>
                         </div>
                         <div class="form-group">  

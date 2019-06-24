@@ -22,6 +22,7 @@
                   
                     <div class="box-body">
                         <div class="form-group">
+                            <input type="hidden" name="id_user" class="form-control" placeholder="Username Login" value="<?php echo $record['id_user']; ?>" readonly />
                             <input type="hidden"  name="id_complain" value="<?php echo $record['id_complain'] ?>" >
                             <label for="">AUM/ Ortom</label>
                             <select name='id_aum' class="form-control ">

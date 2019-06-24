@@ -17,12 +17,11 @@
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
-            <li class="header bg-green-active">MAIN NAVIGATION</li>     
             <?php
             if ($this->session->userdata('role')=='Administrator'){
 
                 ############## parent 0 role WargaMuh #########################################################
-                $main = $this->db->get_where('tb_menu', array('parent' => 0,'role'=>'WargaMuh', 'aktif'=>'Y'));
+                /*$main = $this->db->get_where('tb_menu', array('parent' => 0,'role'=>'WargaMuh', 'aktif'=>'Y'));
 
                 foreach ($main->result() as $m) {
                     // chek ada submenu atau tidak
@@ -68,7 +67,7 @@
                         echo '<li class='.$class2.'>' . anchor(base_url().$m->link, '<i class="' . $m->icon . ' fa-lg">
                             </i>  <span class="treeview">' . strtoupper($m->nama_menu) . '</span>') . '</li>';
                     }                
-                }
+                }*/
 
                 echo '<li class="header bg-green-active">ADMIN NAVIGATION</li> '; 
                     $admin = $this->db->get_where('tb_menu', array('parent' => 0,'role'=>'Administrator','aktif'=>'Y'));
@@ -111,7 +110,8 @@
                                 </i>  <span class="treeview">' . strtoupper($m->nama_menu) . '</span>') . '</li>';
                         }                
                     }           
-            }elseif($this->session->userdata('role')=='WargaMuh' || $this->session->userdata('role')=='Umum'){           
+            }elseif($this->session->userdata('role')=='WargaMuh' || $this->session->userdata('role')=='Umum'){
+            echo '<li class="header bg-green-active">MAIN NAVIGATION</li>     ';           
                 $main = $this->db->get_where('tb_menu', array('parent' => 0,'role'=>'WargaMuh', 'aktif'=>'Y'));
                 foreach ($main->result() as $m) {
                     // chek ada submenu atau tidak
