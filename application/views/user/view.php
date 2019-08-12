@@ -1,3 +1,24 @@
+<style>
+.dt-buttons{
+  display: none;
+}
+
+.dataTables_filter{
+  display: none;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
 <section class="content-header">
     <h1>
         Users Pengguna
@@ -14,9 +35,41 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class='box-header with-border'>
-                    <h3 class='box-title'><a href="<?php echo base_url('user/add'); ?>" class="btn btn-primary btn-small">
+                  <div class="row" style="margin-left:5px">
+                    <div class="column">
+                      <h3 class='box-title'><a href="<?php echo base_url('user/add'); ?>" class="btn btn-primary btn-small">
                       <i class="glyphicon glyphicon-plus"></i> Tambah Data</a></h3>
-                  <label calss='control-label' ></label>
+                    </div>
+                    <div class="column" style="width:50%">
+                      <form action="<?php echo base_url(uri_string()); ?>" method="post" class="form-horizontal">
+                            <div class="form-group">
+                              <div class="col-sm-4">
+                                <select name="filter" class="form-control">
+                                  <option value=''>- Pilih Disini -</option>
+                                  <option value='level' <?php echo  set_select('filter', 'level'); ?>>Level User</option>
+                                  <option value='grup' <?php echo  set_select('filter', 'grup'); ?>>User Group</option>
+                                </select>
+                              </div>
+                              <div class="col-sm-4">
+                              <input type="text" class="form-control" name="key" placeholder="Kata Kunci" value="<?php echo set_value('key'); ?>">
+                              </div>
+                              <div class="col-sm-2">
+                                <input type="submit" value="submit" name="submit" class="btn btn-primary">
+                              </div>
+                              <div class="col-sm-1">
+                                <a href="<?php echo base_url(uri_string()); ?>"><i class="fa fa-refresh fa-2x" title="Refresh"></i></a>
+                              </div>
+                            </div>
+                          </form>
+                    </div>
+                    <div class="column" style="width:10%">
+                      <form action="<?php echo base_url(uri_string().'/excel'); ?>" method="post">
+                            <input type="hidden" name="filter_" value="<?= $filter; ?>">
+                            <input type="hidden" name="key_" value="<?= $key; ?>">
+                            <button type="submit" id="submit" name="submit" class="btn btn-primary">Ekspor XLS</button>
+                          </form>
+                    </div>
+                  </div>
                 </div>
                 <div class="box-body table-responsive">
                     <table id="tb-datatables" class="table table-bordered table-striped" cellspacing="0" width="100%">

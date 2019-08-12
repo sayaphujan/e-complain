@@ -9,7 +9,18 @@ class Aum extends CI_Controller {
     }
     
 	public function index() {
-        $data['record'] = $this->M_aum->semua()->result(); 
+        $filter = $this->input->post('filter');
+        $key    = $this->input->post('key');
+
+        if($filter != ''){
+            $data['record'] = $this->M_aum->filter($filter, $key)->result(); 
+        }else{
+            $data['record'] = $this->M_aum->semua()->result(); 
+        }
+
+        $data['filter'] = $filter;
+        $data['key']    = $key;
+
         $this->template->display('backend/template','aum/view', $data);   
     }
     
@@ -98,7 +109,21 @@ class Aum extends CI_Controller {
         $this->M_aum->hapus($this->uri->segment(3));
     }
 
+    public function excel()
+    {
+        $filter = $this->input->post('filter_');
+        $key    = $this->input->post('key_');
 
+        if($filter != ''){
+            $data['tampil'] = $this->M_aum->filter($filter, $key); 
+        }else{
+            $data['tampil'] = $this->M_aum->semua(); 
+        }
+        
+        $data['filter'] = $filter;
+        $data['key']    = $key;
+        $this->load->view('excel/excel_masteraum', $data);
+    }
     
     
 

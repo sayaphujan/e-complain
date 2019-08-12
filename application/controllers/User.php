@@ -8,8 +8,23 @@ class User extends CI_Controller{
         chek_session();
     }
     
-    function index() {       
-        $data['record']=  $this->db->get('tb_user')->result();
+    function index() {
+        $filter = $this->input->post('filter');
+        $key    = $this->input->post('key');
+        if($filter == 'level'){
+            $data['record'] =  $this->db->like('role', $key)->get('tb_user')->result();
+        }else if($filter == 'grup'){
+            $this->db->select('*');
+            $this->db->from('tb_user a');
+            $this->db->join('tb_grup b', 'a.grup_id = b.grup_id');
+            $this->db->like('nama_grup', $key);
+            $que = $this->db->get();
+            $data['record'] =  $que->result();
+        }else{
+            $data['record'] =  $this->db->get('tb_user')->result();
+        }
+        $data['filter'] = $filter;
+        $data['key']    = $key;
         $this->template->display('backend/template','user/view', $data);    
     }
 
@@ -156,6 +171,41 @@ class User extends CI_Controller{
 
     function delete($id){
         $this->M_user->delete($id);
+    }
+
+    public function excel()
+    {
+        $filter = $this->input->post('filter_');
+        $key    = $this->input->post('key_');
+
+        if($filter == 'level'){
+            $this->db->select('a.nama_user, a.username, a.role, b.nama_grup');
+            $this->db->from('tb_user a');
+            $this->db->join('tb_grup b', 'a.grup_id = b.grup_id');
+            $this->db->like('a.role', $key);
+            $this->db->group_by('a.id_user');
+            $que = $this->db->get('tb_user');
+            $data['filter'] = 'Level User';
+        }else if($filter == 'grup'){
+            $this->db->select('a.nama_user, a.username, a.role, b.nama_grup');
+            $this->db->from('tb_user a');
+            $this->db->join('tb_grup b', 'a.grup_id = b.grup_id');
+            $this->db->like('b.nama_grup', $key);
+            $this->db->group_by('a.id_user');
+            $que = $this->db->get();
+            $data['filter'] = 'User Group';
+        }else{
+            $this->db->select('a.nama_user, a.username, a.role, b.nama_grup');
+            $this->db->from('tb_user a');
+            $this->db->join('tb_grup b', 'a.grup_id = b.grup_id');
+            $this->db->group_by('a.id_user');
+            $que = $this->db->get();
+            $data['filter'] = 'All Data';
+        }
+        
+        $data['tampil'] =  $que;
+        $data['key']    = $key;
+        $this->load->view('excel/excel_user', $data);
     }
 
 }

@@ -50,6 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'welcome';
+$route['find-id/(:any)']			= 'welcome/get_nbm/$1';
 $route['statistik'] 				= 'welcome/statistik';
 $route['statistik-aum']				= 'welcome/statistik_aum';
 $route['statistik-status']			= 'welcome/statistik_status';
@@ -73,6 +74,10 @@ $route['diagram'] 					= 'Diagram';
 $route['diagram/statistik-aum']		= 'Diagram/statistik_aum';
 $route['diagram/statistik-status']	= 'Diagram/statistik_status';
 $route['diagram/statistik-daily']	= 'Diagram/statistik_daily';
+$route['diagram/excel']						= 'Diagram/excel_diagram';
+$route['diagram/statistik-aum/excel']		= 'Diagram/excel_aum';
+$route['diagram/statistik-status/excel']	= 'Diagram/excel_status';
+$route['diagram/statistik-daily/excel']		= 'Diagram/excel_daily';
 
 $route['form'] 						= 'Form';
 $route['form/(:any)']				= 'Form/$1';

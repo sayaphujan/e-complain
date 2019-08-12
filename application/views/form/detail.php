@@ -69,6 +69,11 @@
                             <?php echo form_error('isi_komplain', '<div class="text-red">', '</div>'); ?>
                         </div>
                         <div class="form-group">
+                            <label for="">Tangapan</label>
+                            <textarea name="solusi" class="form-control" rows="2" placeholder="Solusi Atau Tanggapan"  disabled><?php echo $record['solusi']; ?></textarea>
+                            <?php echo form_error('solusi', '<div class="text-red">', '</div>'); ?>
+                        </div>
+                        <div class="form-group">
                             <?php
                             if(empty($record['image']))
                             {

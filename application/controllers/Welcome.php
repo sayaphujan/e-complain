@@ -213,4 +213,9 @@ class Welcome extends CI_Controller {
 
 		$this->template->load('frontend','frontend/statistik_aum', $data);
 	}
+
+	public function get_nbm($id){
+		$data = $this->db->where('id', $id)->get('tb_warga')->result();
+		echo json_encode($data);
+	}
 }

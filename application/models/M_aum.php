@@ -15,6 +15,9 @@ class M_aum extends CI_Model {
         return $this->db->get($this->table);
     }
    
+    function filter($filter, $key) {
+        return $this->db->like('jenis_aum',$filter)->like('nama_aum', $key)->get($this->table);
+    }
     
     function getkode($id_aum) {
         $kode = array('id_aum' => $id_aum);

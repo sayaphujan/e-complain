@@ -137,7 +137,7 @@ class M_user extends CI_Model {
 
         $msg = $this->load->view('email_templates/registrasi',$data,true);    
         $this->email->subject('Selamat Datang di e-complaint PCM Bligo');
-        $this->email->from('admin@pcm-bligo.com','Admin e-complaint PCM Bligo');
+        $this->email->from('infopcmbligo@pcmbligo.or.id','Admin e-complaint PCM Bligo');
         $this->email->to($email);
         $this->email->message($msg);
         if($this->email->send())
@@ -186,9 +186,9 @@ class M_user extends CI_Model {
 
         $msg = $this->load->view('email_templates/forget',$data,true);    
         $this->email->subject('Lupa password di e-complaint PCM Bligo');
-        $this->email->from('admin@pcm-bligo.com','Admin e-complaint PCM Bligo');
+        $this->email->from('infopcmbligo@pcmbligo.or.id','Admin e-complaint PCM Bligo');
         $this->email->to($email);
-        $this->email->cc('shinta.setiawati@gmail.com');
+        $this->email->cc('mrifqi123442@gmail.com');
         $this->email->message($msg);
         if($this->email->send())
         {

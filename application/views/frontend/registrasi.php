@@ -32,32 +32,33 @@ h5, h3{
                           <option value="" disable selected>-- Pilih Jenis Identitas Anda--</option>
                           <option value="nbm">Kartu Anggota Muhammadiyah</option>
                           <option value="ktp">Kartu Tanda Penduduk</option>
-                          <option value="sim">Surat Ijin Mengemudi</option>
+                          <!--<option value="sim">Surat Ijin Mengemudi</option>-->
                         </select>
                     <div class="form-group">
                         <input type="text" class="form-input" name="nomor" placeholder="Nomor Identitas" required/>
+                        <span id="alert_id"></span>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-input" name="nama" placeholder="Nama Lengkap" required/>
+                        <input type="text" class="form-input nbm" name="nama" id="nama" placeholder="Nama Lengkap" required/>
                     </div>
                     <div class="form-group">
-                        <input type="date" data-date="" data-date-format="DD MMMM YYYY" name="ttl" required>
+                        <input type="date" class="nbm" data-date="" data-date-format="DD MMMM YYYY" name="ttl" required>
                     </div>
-                    <select name="jk" id="jk">
+                    <select name="jk" id="jk" class="nbm">
                           <option value="" disable selected>-- Pilih Jenis Kelamin Anda--</option>
                           <option value="pria">Pria</option>
                           <option value="wanita">Wanita</option>
                         </select>
                     <div class="form-group">
-                        <textarea class="materialize-textarea" name="alamat" placeholder="Alamat Lengkap" required></textarea>
+                        <textarea class="materialize-textarea nbm" name="alamat" placeholder="Alamat Lengkap" required></textarea>
+                    </div>
+                     <div class="form-group">
+                        <input type="text" class="form-input nbm" name="pekerjaan" placeholder="Pekerjaan" required/>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-input" name="telp" placeholder="No. Telp/ HP" required/>
+                        <input type="text" class="form-input nbm" name="telp" placeholder="No. Telp/ HP" required/>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-input" name="pekerjaan" placeholder="Pekerjaan" required/>
-                    </div>
-                    <select name='grup' id="grup">
+                    <select name='grup' id="grup" class="nbm">
                             <option value="" disable selected>-- Pilih Grup Anda --</option>
                                 <?php
                                     foreach ($record as $r) {
@@ -66,18 +67,17 @@ h5, h3{
                                 ?>
                     </select>
                     <div class="form-group">
-                        <input type="text" class="form-input" name="username" placeholder="Username" required/>
-                    </div>
+                        <input type="text" class="form-input nbm" name="username" placeholder="Username" required/>                    </div>
                     <div class="form-group">
-                        <input type="password" class="form-input" name="password" id="passwords" placeholder="Password" required/>
+                        <input type="password" class="form-input nbm" name="password" id="passwords" placeholder="Password" required/>
                         <span toggle="#passwords" class="fa fa-eye-slash field-icon toggle-password"></span>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-input" name="email" placeholder="Email" required/>
+                        <input type="email" class="form-input nbm" name="email" placeholder="Email" required/>
                     </div>
                     <div class="form-group">
                       <p><?=$image;?></p>
-                      <input type="text" class="form-input" name="captcha" placeholder="Kode Keamanan" required/>
+                      <input type="text" class="form-input nbm" name="captcha" placeholder="Kode Keamanan" required/>
                       <span><?php echo form_error('captcha'); ?></span>
                     </div>
                     <div class="form-group">
@@ -113,10 +113,52 @@ h5, h3{
         }
       });
 
+    $('#jenis').change(function(){
+      var jenis = $("#jenis").children("option:selected").val();
+      if(jenis == 'nbm'){
+        $(".nbm").removeAttr('required');
+        $(".nbm").attr('readonly', true);
+      }else{
+        $(".nbm").removeAttr('readonly');
+        $(".nbm").attr('required', true);
+      }
+    });
+
+    $("[name='nomor']").focusout(function(){
+      var nomor = $("[name='nomor']").val();
+
+      $.ajax({
+              type: "get",
+              url: "<?php echo base_url('find-id')?>/"+nomor,
+              dataType : 'json',
+              success: function (data) {
+                var i;
+                if(data.length <1){
+                  alert('Nomor Identitas tidak dikenal')
+                  //$("alert-id").text('Nomor Identitas tidak dikenal');
+                }else{
+                  $(".nbm").removeAttr('readonly');
+                  $(".nbm").attr('required', true);
+                  for(i=0; i<data.length; i++){
+                    $("[name='nama']").val(data[i].nama);
+                    $("[name='ttl']").val(data[i].tgl_lahir);
+                    msValue($("[name='jk']"), data[i].jenis_kelamin);
+                    $("[name='alamat']").val(data[i].alamat);
+                    $("[name='pekerjaan']").val(data[i].pekerjaan);
+                    $("[name='telpon']").val('+62');
+                  }
+                }
+              },
+              error: function (data) {
+                  //console.log('Error:', data);
+                  alert('Error:', data);
+              }
+          });
+    });
+
 })(jQuery);
 
 function msValue (selector, value) {
  selector.val(value).closest('.select-wrapper').find('li').removeClass("active").closest('.select-wrapper').find('.select-dropdown').val(value).find('span:contains(' + value + ')').parent().addClass('selected active');
 }
   </script>
-

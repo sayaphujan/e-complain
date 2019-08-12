@@ -26,6 +26,19 @@
 
     <div class="row">
         <div class="col-md-12">
+                    <form action="<?php echo base_url(uri_string()); ?>" method="post">
+                        
+                        Dari <input type="date" id="min-date" name="min-date" value="<?= $min_date; ?>">
+                        s/d  <input type="date" id="max-date" name="max-date" value="<?= $max_date;?>">
+                        <input type="submit" value="submit" name="submit" class="btn btn-primary">
+                    </form>
+                    <br/>
+                    <form action="<?php echo base_url(uri_string().'/excel'); ?>" method="post">
+                        <input type="hidden" name="min" value="<?= $min_date; ?>">
+                        <input type="hidden" name="max" value="<?= $max_date;?>">
+                        <button type="submit" id="submit" name="submit" class="btn btn-primary">Ekspor XLS</button>
+                    </form>
+                    <hr/>
             <div class="box box-primary">
               <div id="container" style="height: 400px; min-width: 600px"></div>
             </div><!-- /.box -->

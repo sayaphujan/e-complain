@@ -17,11 +17,11 @@ class Form extends CI_Controller {
     function add() {                
         if (isset($_POST['submit'])) {
             $this->form_validation->set_message('required', '%s harus diisi');
-            $this->form_validation->set_rules('id_aum', 'username', 'trim|required|is_unique[tb_user.username]');
-            $this->form_validation->set_rules('judul_complain', 'password', 'required');
-            $this->form_validation->set_rules('jenis_complain', 'Nama Pengguna', 'required');
-            $this->form_validation->set_rules('kategori', 'Jenis Kelamin', 'required');
-            $this->form_validation->set_rules('isi_komplain', 'Alamat User', 'required');  
+            $this->form_validation->set_rules('id_aum', 'Id AUM', 'trim|required|is_unique[tb_user.username]');
+            $this->form_validation->set_rules('judul_complain', 'Judul Komplain', 'required');
+            $this->form_validation->set_rules('jenis_complain', 'Jenis Komplain', 'required');
+            $this->form_validation->set_rules('kategori', 'Kategori', 'required');
+            $this->form_validation->set_rules('isi_komplain', 'Isi Komplain', 'required');  
             if ($this->form_validation->run() == true) {
                 $this->M_image->do_upload();
                 $image= $this->upload->file_name;

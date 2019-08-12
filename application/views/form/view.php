@@ -22,14 +22,15 @@
                             <tr>
                                <th>No.</th>
                                 <th>Objek Komplain</th>
-                                <th>Grup</th>
+                                <!--<th>Grup</th>-->
                                 <th>Judul Komplain</th>
                                 <th>Jenis Komplain</th>
                                 <th>Kategori</th>
                                 <th>Tgl Komplain</th>
                                 <th>Status Komplain</th>
                                 <th>Status</th>
-                                <th>Edit</th>
+                                <th>Tanggapan</th>
+                                <!--<th>Edit</th>-->
                                 <th>Hapus</th>
                                 <th>Detail</th>
                             </tr>
@@ -40,18 +41,19 @@
                             <tr>
                                <td><?php echo $no ?></td>
                                <td><?php echo $r->nama_aum ?></td>
-                               <td><?php echo $r->nama_grup ?></td>
+                               <!--<td><?php echo $r->nama_grup ?></td>-->
                                <td><?php echo $r->judul_complain ?></td>
                                <td><?php echo $r->jenis_complain ?></td>
                                <td><?php echo $r->kategori ?></td>
                                <td><?php echo $r->tgl_complain ?></td>
                                <td><?php echo $r->status_complain ?></td>
                                <td><?php echo $r->status ?></td>
-                               <td>
+                               <td><?php echo $r->solusi ?></td>
+                               <!--<td>
                                 <a href="<?php echo base_url('form/edit/'. $r->id_complain)?>"
                                   class="btn btn-info btn-sm glyphicon glyphicon-edit" data-toggle="tooltip" title="Edit">
                                 </a>
-                               </td>
+                               </td>-->
                                <td>
                                 <?php if($r->status == 'pending'){
                                   echo '<a href="'.base_url('form/delete/'.$r->id_complain).'" onClick="return confirm("Anda yakin akan menghapus data ini ?")" class="btn-sm btn-info glyphicon glyphicon-trash" data-toggle="tooltip" title="Delete" ></a>';

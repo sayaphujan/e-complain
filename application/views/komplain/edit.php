@@ -10,7 +10,7 @@
 </section>
 <section class="content">
     <div class="row">
-        <!-- left column -->
+        <!-- left column --> 
         <div class="col-md-12">
             <!-- general form elements -->
             <div class="box box-primary">
@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <input type="hidden"  name="id_complain" value="<?php echo $record['id_complain'] ?>" >
                             <label for="">AUM/ Ortom</label>
-                            <select name='id_aum' class="form-control " readonly>
+                            <select name='id_aum' class="form-control " readonly="readonly">
                             <option value='0'>- Select Aum/ Ortom-</option>
                                 <?php
                                 if (!empty($aum)) {

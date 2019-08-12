@@ -305,8 +305,6 @@
     });
 
     $(function () {
-    $('#min-date').datetimepicker();
-    $('#max-date').datetimepicker();
     $('#datetimepicker1').datetimepicker();
     $('#datetimepicker2').datetimepicker({
     	format: 'd-m-Y H:i'

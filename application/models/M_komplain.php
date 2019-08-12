@@ -18,6 +18,22 @@ class M_komplain extends CI_Model {
         $this->db->join($this->tb_grup.' d','a.grup_id=d.grup_id');
         return $this->db->get();
     }
+
+    function filter($filter, $key) {
+        $this->db->select('*');
+        $this->db->from($this->table.' a');
+        $this->db->join($this->tb_user.' b','a.id_user=b.id_user');
+        $this->db->join($this->tb_aum.' c','a.id_aum=c.id_aum');
+        $this->db->join($this->tb_grup.' d','a.grup_id=d.grup_id');
+        if($filter == 'level'){
+            $this->db->like('b.role', $key);
+        }else if($filter == 'grup'){
+            $this->db->like('d.nama_grup', $key);
+        }else if($filter == 'jenis'){
+            $this->db->like('a.jenis_complain', $key);
+        }
+        return $this->db->get();
+    }
    
     
     function getkode($id) {

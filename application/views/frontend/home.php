@@ -2,7 +2,7 @@
 <div class="slider">
   <ul class="slides">
     <li>
-<img src="<?php echo base_url('assets/img/gedung_dakwah.jpg');?>">
+<img src="<?php echo base_url('assets/img/gdm1.jpg');?>">
       <div class="caption left-align">
         <h3>Selamat Datang</h3>
         <h5 class="light grey-text text-lighten-3">Di Website e-Complaint PCM Bligo</h5>
@@ -10,10 +10,18 @@
     </li>
 
     <li>
-      <img src="<?php echo base_url('assets/img/gedung_dakwah.jpg');?>">
+      <img src="<?php echo base_url('assets/img/gdm2.jpg');?>">
       <div class="caption right-align">
         <h3>Fasilitas penyampaian</h3>
         <h5 class="light grey-text text-lighten-3"> Keluhan, saran maupun masukan untuk PCM Bligo yang lebih baik</h5>
+      </div>
+    </li>
+
+    <li>
+      <img src="<?php echo base_url('assets/img/gdm3.jpg');?>">
+      <div class="caption up-align">
+        <h3>Kerahasiaan Identitas Anda</h3>
+        <h5 class="light grey-text text-lighten-3"> Dijamin aman oleh PCM Bligo</h5>
       </div>
     </li>
   </ul>

@@ -5,6 +5,7 @@ class Diagram extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model(array('M_menu'));
+        $this->load->library('session');
         chek_session();
     }
     
@@ -14,19 +15,18 @@ class Diagram extends CI_Controller {
 
 		if($min==''){
 			//$min = date('Y-m-d', strtotime("-30 days"));
-			$min = date('Y/m/01');
+			$min = date('Y-m-01');
 			$data['min_date'] = $min;
 		}else{
 			$data['min_date'] = $this->input->post('min-date');
 		}
 
 		if($max==''){
-			$max = date('Y/m/d');
+			$max = date('Y-m-d');
 			$data['max_date'] = $max;
 		}else{
 			$data['max_date'] = $this->input->post('max-date');
 		}
-
 
 		/*** PIE PAYMENT ***/
 		$array_kategori = array('Jumlah Data');
@@ -61,14 +61,14 @@ class Diagram extends CI_Controller {
 
 		if($min==''){
 			//$min = date('Y-m-d', strtotime("-30 days"));
-			$min = date('Y/m/01');
+			$min = date('Y-m-01');
 			$data['min_date'] = $min;
 		}else{
 			$data['min_date'] = $this->input->post('min-date');
 		}
 
 		if($max==''){
-			$max = date('Y/m/d');
+			$max = date('Y-m-d');
 			$data['max_date'] = $max;
 		}else{
 			$data['max_date'] = $this->input->post('max-date');
@@ -107,14 +107,14 @@ class Diagram extends CI_Controller {
 
 		if($min==''){
 			//$min = date('Y-m-d', strtotime("-30 days"));
-			$min = date('Y/m/01');
+			$min = date('Y-m-01');
 			$data['min_date'] = $min;
 		}else{
 			$data['min_date'] = $this->input->post('min-date');
 		}
 
 		if($max==''){
-			$max = date('Y/m/d');
+			$max = date('Y-m-d');
 			$data['max_date'] = $max;
 		}else{
 			$data['max_date'] = $this->input->post('max-date');
@@ -153,20 +153,19 @@ class Diagram extends CI_Controller {
 
 		if($min==''){
 			//$min = date('Y-m-d', strtotime("-30 days"));
-			$min = date('Y/m/01');
+			$min = date('Y-m-01');
 			$data['min_date'] = $min;
 		}else{
 			$data['min_date'] = $this->input->post('min-date');
 		}
 
 		if($max==''){
-			$max = date('Y/m/d');
+			$max = date('Y-m-d');
 			$data['max_date'] = $max;
 		}else{
 			$data['max_date'] = $this->input->post('max-date');
 		}
 
-		/*** PIE PAYMENT ***/
 		$array_kategori = array('Jumlah Data Masuk');
 		$array_series = array(array('name'=>'Jumlah Data', 'data'=>array()));
 		$array_datas = array();
@@ -185,12 +184,57 @@ class Diagram extends CI_Controller {
 		 
 		$data['array_kategori'] = json_encode($array_kategori);
 		$data['pie'] = json_encode($array_series);
-		/*** END ***/
 
 		$data['total'] = $this->M_menu->total($min, $max);
 
 		$this->template->display('backend/template','diagram', $data);
 	}
 
+	public function excel_diagram()
+	{
+		$awal  = $this->input->post('min');
+		$akhir = $this->input->post('max');
 
+        $data['tampil']     = $this->M_menu->excel_diagram($awal, $akhir);
+        $data['awal']       = substr($awal, -2).'-'.substr($awal, 5, 2).'-'.substr($awal, 0,4);
+        $data['akhir']      = substr($akhir, -2).'-'.substr($akhir, 5, 2).'-'.substr($akhir, 0,4);
+
+        $this->load->view('excel/excel_diagram', $data);
+	}
+
+	public function excel_daily()
+	{
+		$awal  = $this->input->post('min');
+		$akhir = $this->input->post('max');
+
+        $data['tampil']     = $this->M_menu->excel_daily($awal, $akhir);
+        $data['awal']       = substr($awal, -2).'-'.substr($awal, 5, 2).'-'.substr($awal, 0,4);
+        $data['akhir']      = substr($akhir, -2).'-'.substr($akhir, 5, 2).'-'.substr($akhir, 0,4);
+
+        $this->load->view('excel/excel_daily', $data);
+	}
+
+	public function excel_aum()
+	{
+		$awal  = $this->input->post('min');
+		$akhir = $this->input->post('max');
+
+        $data['tampil']     = $this->M_menu->excel_aum($awal, $akhir);
+        $data['awal']       = substr($awal, -2).'-'.substr($awal, 5, 2).'-'.substr($awal, 0,4);
+        $data['akhir']      = substr($akhir, -2).'-'.substr($akhir, 5, 2).'-'.substr($akhir, 0,4);
+
+        $this->load->view('excel/excel_aum', $data);
+	}
+
+	public function excel_status()
+	{
+		$awal  = $this->input->post('min');
+		$akhir = $this->input->post('max');
+
+        $data['tampil']     = $this->M_menu->excel_status($awal, $akhir);
+        $data['awal']       = substr($awal, -2).'-'.substr($awal, 5, 2).'-'.substr($awal, 0,4);
+        $data['akhir']      = substr($akhir, -2).'-'.substr($akhir, 5, 2).'-'.substr($akhir, 0,4);
+
+        $this->load->view('excel/excel_status', $data);
+	}
 }

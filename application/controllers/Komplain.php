@@ -9,7 +9,17 @@ class Komplain extends CI_Controller {
     }
     
 	public function index() {
-        $data['record'] = $this->M_komplain->semua()->result(); 
+        $filter = $this->input->post('filter');
+        $key    = $this->input->post('key');
+
+        if($filter != ''){
+            $data['record'] = $this->M_komplain->filter($filter, $key)->result(); 
+        }else{
+            $data['record'] = $this->M_komplain->semua()->result(); 
+        }
+
+        $data['filter'] = $filter;
+        $data['key']    = $key;
         $this->template->display('backend/template','komplain/view', $data);   
     }
     
@@ -96,7 +106,7 @@ class Komplain extends CI_Controller {
                         'jenis_complain'  => $this->input->post('jenis_complain'),
                         'kategori'        => $this->input->post('kategori'),
                         'isi_komplain'    => $this->input->post('isi_komplain'),
-                        'tgl_complain'    => date('Y:m:d H:i:s'),
+                        //'tgl_complain'    => date('Y:m:d H:i:s'),
                         'solusi'          => $this->input->post('solusi'),
                         'status_complain' => $this->input->post('status_complain'),
                         'status'          => $this->input->post('status'),
@@ -115,7 +125,7 @@ class Komplain extends CI_Controller {
                         'jenis_complain'  => $this->input->post('jenis_complain'),
                         'kategori'        => $this->input->post('kategori'),
                         'isi_komplain'    => $this->input->post('isi_komplain'),
-                        'tgl_complain'    => date('Y:m:d H:i:s'),
+                        //'tgl_complain'    => date('Y:m:d H:i:s'),
                         'solusi'          => $this->input->post('solusi'),
                         'status_complain' => $this->input->post('status_complain'),
                         'status'          => $this->input->post('status'),
@@ -145,5 +155,20 @@ class Komplain extends CI_Controller {
     function delete(){
         $this->M_komplain->hapus($this->uri->segment(3));
     } 
+
+    public function excel() {
+        $filter = $this->input->post('filter_');
+        $key    = $this->input->post('key_');
+
+        if($filter != ''){
+            $data['tampil'] = $this->M_komplain->filter($filter, $key); 
+        }else{
+            $data['tampil'] = $this->M_komplain->semua(); 
+        }
+
+        $data['filter'] = $filter;
+        $data['key']    = $key;
+        $this->load->view('excel/excel_komplain', $data);  
+    }
 
 }
